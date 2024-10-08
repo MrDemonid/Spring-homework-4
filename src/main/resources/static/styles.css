@@ -6,6 +6,11 @@ h1 {
     font-family: 'Arial', sans-serif;
 }
 
+p {
+    font-size: large;
+    color: indigo;
+}
+
 h2 {
     color: green;
 }
@@ -16,4 +21,8 @@ ul, ol, li, th {
 
 td {
     color: darkslateblue;
+}
+
+button {
+    background-color: indianred;
 }

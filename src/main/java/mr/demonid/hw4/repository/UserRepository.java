@@ -1,5 +1,6 @@
 package mr.demonid.hw4.repository;
 
+import mr.demonid.hw4.config.SqlConfig;
 import mr.demonid.hw4.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,16 +12,16 @@ import java.util.List;
 public class UserRepository implements IRepository {
 
     private final JdbcTemplate jdbc;
+    private SqlConfig sqlRequests;                // sql-запросы из файла-конфигурации
 
-    public UserRepository(JdbcTemplate jdbc) {
+    public UserRepository(JdbcTemplate jdbc, SqlConfig sqlRequests) {
         this.jdbc = jdbc;
+        this.sqlRequests = sqlRequests;
     }
 
     @Override
     public List<User> getUsers() {
-        String sql = "SELECT * FROM userTable";
-
-        return jdbc.query(sql, (rs, rowNum) -> {
+        return jdbc.query(sqlRequests.getGetAllUser(), (rs, rowNum) -> {
             User user = new User();
             user.setId(rs.getInt("id"));
             user.setFirstName(rs.getString("firstName"));
@@ -33,16 +34,13 @@ public class UserRepository implements IRepository {
 
     @Override
     public User addUser(User user) {
-        String sql = "INSERT INTO userTable (firstName, lastName, birthDate, email) VALUES(?, ?, ?, ?)";
-        jdbc.update(sql, user.getFirstName(), user.getLastName(), user.getSqlBirthDate(), user.getEmail());
+        jdbc.update(sqlRequests.getInsert(), user.getFirstName(), user.getLastName(), user.getSqlBirthDate(), user.getEmail());
         return user;
     }
 
     @Override
     public User getUser(int id) {
-        String sql = "SELECT * FROM userTable WHERE id=?";
-
-        return jdbc.query(sql,new Object[]{id}, new int[]{Types.INTEGER}, (rs, rowNum) -> {
+        return jdbc.query(sqlRequests.getGetUser(),new Object[]{id}, new int[]{Types.INTEGER}, (rs, rowNum) -> {
             User user = new User();
             user.setId(rs.getInt("id"));
             user.setFirstName(rs.getString("firstName"));
@@ -55,16 +53,12 @@ public class UserRepository implements IRepository {
 
     @Override
     public void deleteUser(int id) {
-        String sql = "DELETE FROM userTable WHERE id=?";
-
-        jdbc.update(sql, id);
+        jdbc.update(sqlRequests.getDeleteUser(), id);
     }
 
     @Override
     public User updateUser(User user) {
-        String sql = "UPDATE userTable SET firstName=?, lastName=?, birthDate=?, email=? WHERE id=?";
-
-        jdbc.update(sql, user.getFirstName(), user.getLastName(), user.getSqlBirthDate(), user.getEmail(), user.getId());
+        jdbc.update(sqlRequests.getUpdateUser(), user.getFirstName(), user.getLastName(), user.getSqlBirthDate(), user.getEmail(), user.getId());
         return getUser(user.getId());
     }
 }

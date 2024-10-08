@@ -11,3 +11,12 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+command:
+  sql:
+    insert: "INSERT INTO userTable (firstName, lastName, birthDate, email) VALUES(?, ?, ?, ?)"
+    get-user: "SELECT * FROM userTable WHERE id=?"
+    get-all-user: "SELECT * FROM userTable"
+    delete-user: "DELETE FROM userTable WHERE id=?"
+    update-user: "UPDATE userTable SET firstName=?, lastName=?, birthDate=?, email=? WHERE id=?"
+
