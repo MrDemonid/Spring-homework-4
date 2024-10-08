@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/styles.css">
+<title>Обновление данных о пользователе.</title>
+</head>
+
+<body>
+<h2>Введите новые данные.</h2>
+<br>
+<form action="#" th:action="@{/users}" th:object="${user}" th:method="put">
+    <label for="id">id</label>
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="Id">
+    <br/>
+    <label for="firstName">Автор</label>
+    <input type="text" th:field="*{firstName}" id="firstName" placeholder="Имя">
+    <br/>
+    <label for="lastName">Название</label>
+    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Фамилия">
+    <br/>
+    <label for="birthDate">Дата издания</label>
+    <input type="text" th:field="*{birthDate}" id="birthDate" placeholder="Дата рождения">
+    <br/>
+    <label for="email">Название</label>
+    <input type="text" th:field="*{email}" id="email" placeholder="Почта">
+    <br/>
+    <button>Изменить</button>
+</form>
+</body>
+</html>

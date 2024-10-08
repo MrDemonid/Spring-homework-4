@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: "Spring-homework-4"
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:userTable
+    username: root
+    password: ""
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

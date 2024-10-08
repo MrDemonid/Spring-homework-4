@@ -1,0 +1,19 @@
+body {
+    background-color: lightblue;
+}
+h1 {
+    color: brown;
+    font-family: 'Arial', sans-serif;
+}
+
+h2 {
+    color: green;
+}
+
+ul, ol, li, th {
+    color: darkblue;
+}
+
+td {
+    color: darkslateblue;
+}

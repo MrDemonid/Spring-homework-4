@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Пользователи.</title>
+</head>
+<body>
+<h1>Список пользователей.</h1>
+<div th:switch="${users}">
+    <h2 th:case="null">Пользователй нет!</h2>
+    <div th:case="*">
+        <h2>Пользователя в наличии:</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Дата рождения</th>
+                <th>Почта</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.birthDate}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <form action="#" th:action="@{users/update/{id}(id=${user.id})}" th:method="get">
+                        <input type="hidden" value="Изменить">
+                        <button type="submit">Изменить</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="#" th:action="@{/users/{id}(id=${user.id})}" th:method="delete">
+                        <input type="hidden" value="Удалить">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<p><a href="/users/create">Добавить нового пользователя.</a></p>
+</body>
+</html>
