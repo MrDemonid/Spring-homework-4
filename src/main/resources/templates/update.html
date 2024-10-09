@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/styles.css">
-<title>Обновление данных о пользователе.</title>
+    <meta charset="UTF-8">
+    <title>Обновление данных о пользователе.</title>
+    <link rel="stylesheet" th:href="@{/form-style.css}">
 </head>
-
 <body>
-<h2>Введите новые данные.</h2>
-<br>
-<form action="#" th:action="@{/users}" th:object="${user}" th:method="put">
-    <label for="id">id</label>
-    <input readonly type="number" th:field="*{id}" id="id" placeholder="Id">
-    <br/>
-    <label for="firstName">Автор</label>
-    <input type="text" th:field="*{firstName}" id="firstName" placeholder="Имя">
-    <br/>
-    <label for="lastName">Название</label>
-    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Фамилия">
-    <br/>
-    <label for="birthDate">Дата издания</label>
-    <input type="text" th:field="*{birthDate}" id="birthDate" placeholder="Дата рождения">
-    <br/>
-    <label for="email">Название</label>
-    <input type="text" th:field="*{email}" id="email" placeholder="Почта">
-    <br/>
-    <button>Изменить</button>
-</form>
+
+<div class="form-container">
+    <h2>Введите новые данные</h2>
+    <form action="#" th:action="@{/users}" th:object="${user}" th:method="put">
+        <div class="form-group">
+            <label for="id">Id:</label>
+            <input readonly type="text" id="id" name="id" th:value="*{id}"  placeholder="id" required>
+        </div>
+        <div class="form-group">
+            <label for="firstName">Имя:</label>
+            <input type="text" id="firstName" name="firstName" th:value="*{firstName}"  placeholder="Имя" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Фамилия:</label>
+            <input type="text" id="lastName" name="lastName" th:value="*{lastName}" placeholder="Фамилия" required>
+        </div>
+        <div class="form-group">
+            <label for="birthDate">Дата рождения:</label>
+            <input type="text" id="birthDate" name="birthDate" th:value="*{birthDate}" placeholder="Дата рождения" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Почта:</label>
+            <input type="text" id="email" name="email" th:value="*{email}" placeholder="Почта" required>
+        </div>
+        <div class="button-group">
+            <button type="submit" class="submit-button">Отправить</button>
+            <button type="button" class="cancel-button" onclick="history.back()">Отмена</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
+
