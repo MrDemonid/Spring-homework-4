@@ -1,5 +1,6 @@
 package mr.demonid.hw4.controller;
 
+import lombok.extern.java.Log;
 import mr.demonid.hw4.domain.User;
 import mr.demonid.hw4.services.IService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/users")
+@Log
 public class UserController {
 
     @Autowired
@@ -40,6 +42,7 @@ public class UserController {
      */
     @PostMapping
     public String createUser(@ModelAttribute User user) {
+        log.info(user.toString());
         service.createUser(user);
         return "redirect:/users";
     }
